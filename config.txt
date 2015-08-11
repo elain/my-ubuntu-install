@@ -1,0 +1,30 @@
+ssh_config:
+
+Host *
+        ControlMaster auto
+        ControlPath ~/.ssh/master-%r@%h:%p
+
+
+
+salt:
+
+#!/usr/bin/expect -f
+spawn ssh elain@xxxx.com
+send "hd hostname\r"
+interact
+
+
+vpn:
+
+#!/bin/bash
+case $1 in
+    start)
+        sudo /home/elain/apps/sslvpn_client/jnc -n xxx
+    ;;
+    stop)
+        sudo /home/elain/apps/sslvpn_client/jnc stop
+    ;;
+    *)
+        echo "$0 [start|stop]"
+    ;;
+esac
